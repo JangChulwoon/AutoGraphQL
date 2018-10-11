@@ -4,7 +4,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 class People {
-    private String name;
+    private def name;
     private String address;
     private int age;
 
@@ -40,6 +40,8 @@ class People {
 }
 
 // class 이름은 명세나 스펙과 관련되어 있는 이름 ..  Ex MyFirstSpecification
+
+//@Ignore 이렇게하면 IgnoreRest 도 무시된다.
 class SimpleSpock extends Specification {
 
     // Shared를 안붙이면 setUp과 동일하게 동작한다.
@@ -65,6 +67,8 @@ class SimpleSpock extends Specification {
         "Fizz"  | 4
     }
 
+//    @IgnoreRest
+    // 얘 빼고 다 무시  즉, 얘만 실행
     def "numTest"() {
 
         expect:
@@ -80,24 +84,32 @@ class SimpleSpock extends Specification {
 
     def "wrong case fixture method"() {
 
-        when:
+        given: "text"
+
+
+        when: "음 ?"
         def people = new People("Jang", "yong-In", 25);
 
-        then:
+        then: "테스트"
         fixtureMethod(people) // wrong case
 
     }
 
     def fixtureMethod(people) {
-        people.name == "Jang" && people.address == "yong-In" && people.age == 25
+        people.name == "Jang" && people.address == "yong-In" && people.age == 24
     }
 
     def "wrong case_2(?) fixture method"() {
+
 
         when:
         def people = new People("Jang", "yong-In", 25);
 
         then:
+        true
+
+        and: "um ...?" // block 중간에서 설명을 하는 용도 인듯.
+        // 조금 더 깔끔해질지도 ...???
         fixtureMethod2(people) // wrong case
 
     }
@@ -138,20 +150,20 @@ class SimpleSpock extends Specification {
  * with 는 하나라도 실패하면 아래 문장을 실행하지 않음.
  * verifyAll 는 모두 다 검사함. 실패해도 다음것을 검사. 
  */
-    def "verifyAll statement"() {
+
+    def "안녕 이건 테스트야"() {
 
         given:
         def people = new People("Jang", "yong-In", 25)
 
         expect:
         with(people) {
-            verifyAll {
                 name == "Jang1"
                 address == "yong-In"
                 age == 24
-            }
         }
 
     }
 
 }
+// todo 배운거 정리
