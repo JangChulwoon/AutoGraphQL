@@ -1,4 +1,4 @@
-package org.toy.autographql.command;
+package org.toy.til.command;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

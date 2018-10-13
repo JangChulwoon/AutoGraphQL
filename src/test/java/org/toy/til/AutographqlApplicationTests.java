@@ -1,4 +1,4 @@
-package org.toy.autographql;
+package org.toy.til;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

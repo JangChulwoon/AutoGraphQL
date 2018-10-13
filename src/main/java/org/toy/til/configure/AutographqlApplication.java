@@ -1,4 +1,4 @@
-package org.toy.autographql.configure;
+package org.toy.til.configure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

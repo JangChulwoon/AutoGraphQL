@@ -1,4 +1,4 @@
-package org.toy.autographql.groovy
+package org.toy.til.groovy
 
 import org.spockframework.runtime.SpockAssertionError
 import spock.lang.FailsWith
