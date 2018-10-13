@@ -1,169 +1,218 @@
 package org.toy.autographql.groovy
 
+import org.spockframework.runtime.SpockAssertionError
+import spock.lang.FailsWith
 import spock.lang.Shared
 import spock.lang.Specification
 
-class People {
-    private def name;
-    private String address;
-    private int age;
 
-    People(String name, String address, int age) {
-        this.name = name
-        this.address = address
-        this.age = age
-    }
-
-    String getName() {
-        return name
-    }
-
-    void setName(String name) {
-        this.name = name
-    }
-
-    String getAddress() {
-        return address
-    }
-
-    void setAddress(String address) {
-        this.address = address
-    }
-
-    int getAge() {
-        return age
-    }
-
-    void setAge(int age) {
-        this.age = age
-    }
-}
-
-// class 이름은 명세나 스펙과 관련되어 있는 이름 ..  Ex MyFirstSpecification
-
-//@Ignore 이렇게하면 IgnoreRest 도 무시된다.
+// class name convention is (word)Specification
 class SimpleSpock extends Specification {
 
-    // Shared를 안붙이면 setUp과 동일하게 동작한다.
+    /**
+     * if don't use @shared, the Variable is not shared.
+     * In a nutshell, Methods don't share the **nonShared** Variable.
+     *
+     * Comment ..
+     * setupSpec() and cleanupSpec() -> shared variable
+     * setup() and cleanup() -> none shared variable
+     *
+     */
+
+    /**
+     * if sub Class implement the setUp Method, First, It is call super cleanup Method. and then, execute sub method.
+     * cleanup is reverse.
+     *
+     * setupSpec / cleanupSpec same.
+     * so we do not sentences  such as `super.cleanup()`.
+     */
+
+
     @Shared
-    def num = 4
-    // def num = 4;
+    def sharedNum = 4
+    def nonSharedNum = 4
 
-    // setupSpec or cleanupSpec -> shared
-    // 일반 애들 setup() and cleanup()
-
-    // if setUp 을 구현한 하위 클래스가 있으면, super -> sub
-    // cleanup 은 반대. 서브 -> 슈퍼
-    // setupSpec / cleanupSpec 도 동일하게 행동 때문에 super.setUp() 같은 짓을 할필요 없음
-
-    def "SimpleSpockTest"() {
+    def "non shard variable TC1"() {
+        given:
+        nonSharedNum = 0
 
         expect:
-        name.size() == length
-
-        where:
-        name    | length
-        "Spock" | 5
-        "Fizz"  | 4
+        nonSharedNum == 0
     }
 
-//    @IgnoreRest
-    // 얘 빼고 다 무시  즉, 얘만 실행
-    def "numTest"() {
+    def "non shard variable TC2"() {
+        expect:
+        nonSharedNum == 4
+    }
+
+
+    def "shard variable TC1"() {
+        given:
+        sharedNum = 0
 
         expect:
-        name.size() == length
-
-        where:
-        name    | length
-        "Spock" | 5
-        "Fizz"  | 4
+        sharedNum == 0
     }
 
-    // helper method
+    def "shard variable TC2"() {
+        expect:
+        sharedNum == 0
+    }
 
+    /**
+     * Annotation Comment
+     *
+     * @IgnoreRest - except this method to ignore other methods
+     * @Ignore - method or specification ignore
+     * @FailsWith ( E r r o r T y p e ) - Failure in the specified Type
+     */
+
+    def "when then example"() {
+
+        given:
+        def multiplier = 2
+
+        expect:
+        square == Math.pow(origin, multiplier)
+
+        where:
+        origin | square
+        4      | 16
+        13     | 169
+        15     | 225
+    }
+
+    def "expect example"() {
+
+        given:
+        def multiplier = 2
+
+        expect:
+        square == Math.pow(origin, multiplier)
+
+        where:
+        origin | square
+        4      | 16
+        13     | 169
+        15     | 225
+    }
+
+    def "cleanup and where blcok"() {
+        Socket con = new Socket()
+
+        expect: "you can write about block' explanation"
+        a != b
+
+        cleanup: "cleanup is locate before where block. It is free memory"
+        con.close()
+
+        where: "where block can help data injection! first a = 2, b = 4 and a = 4 , b = 5 "
+        a | b
+        2 | 4
+        4 | 5
+
+    }
+
+    // don't use helper Method.
+    // just use fixture.
+
+    @FailsWith(SpockAssertionError)
     def "wrong case fixture method"() {
 
-        given: "text"
+        given:
+        def name = "chulwoon"
+        def age = 25
+        def address = "yongIn"
 
+        expect:
+        fixtureMethod(name, age, address) // wrong case
 
-        when: "음 ?"
-        def people = new People("Jang", "yong-In", 25);
+    }
 
-        then: "테스트"
-        fixtureMethod(people) // wrong case
+    def fixtureMethod(name, age, address) {
+        name == "Jang" && address == "yong-In" && age == 24
+    }
+
+    /**
+     * this case show elegant log.
+     * but if fixture method return value, It is failing condition which is not what we want.
+     * so Spock recommend to use Helper Method.
+     *
+     * Plus, helper methods can increase the coupling between feature methods.
+     *
+     */
+    @FailsWith(SpockAssertionError)
+    def "wrong case_2 fixture method"() {
+
+        def name = "chulwoon"
+        def age = 25
+        def address = "yongIn"
+
+        expect: "use assert !"
+        fixtureMethod2(name, age, address)
+
 
     }
 
-    def fixtureMethod(people) {
-        people.name == "Jang" && people.address == "yong-In" && people.age == 24
+    void fixtureMethod2(name, age, address) {
+        assert name == "chulwoon"
+        assert address == "yongIn"
+        assert age == 24
     }
 
-    def "wrong case_2(?) fixture method"() {
 
+    class People {
+        def name
+        def address
+        def age
 
-        when:
-        def people = new People("Jang", "yong-In", 25);
+        People() {
+        }
 
-        then:
-        true
-
-        and: "um ...?" // block 중간에서 설명을 하는 용도 인듯.
-        // 조금 더 깔끔해질지도 ...???
-        fixtureMethod2(people) // wrong case
-
+        People(name, address, age) {
+            this.name = name
+            this.address = address
+            this.age = age
+        }
     }
-/**
- * first. 계속 assert 를 써야함.
- * second. method가 void 로 선언되어야함.
- * 만약 마지막/ 중간에 false를 리턴하면 테스트도 깨진다.
- * 선호 되지는 않네 ..?
- * @param people
- */
-    def fixtureMethod2(people) {
-        assert people.name == "Jang"
-        assert people.address == "yong-In"
-        assert people.age == 25
-        // false
-    }
-/**
- * Fixture method 나 helper method는 피해야함.
- * 한가지 변화에 대해 2개 이상의 TC가 변경될 수 있기때문
- * 결합도도 심하고 ...
- */
 
+    // It is helper Method :D
 
     def "with statement"() {
 
         when:
-        def people = new People("Jang", "yong-In", 25);
+        def people = new People("Jang", "yong-In", 25)
 
-        then:
+        then: "we don't use assert keyword !! Just use block with ( value ) {} "
+
         with(people) {
             name == "Jang"
             address == "yong-In"
             age == 25
         }
-
     }
-/**
- * with 는 하나라도 실패하면 아래 문장을 실행하지 않음.
- * verifyAll 는 모두 다 검사함. 실패해도 다음것을 검사. 
- */
 
-    def "안녕 이건 테스트야"() {
+    /**
+     * verifyAll Helper is all check condition even if condition fail.
+     */
+    @FailsWith(SpockAssertionError)
+    def "verifyAll statement"() {
+        def people = new People()
 
-        given:
-        def people = new People("Jang", "yong-In", 25)
-
-        expect:
-        with(people) {
-                name == "Jang1"
-                address == "yong-In"
-                age == 24
+        people.with { // lol ...
+            name = "Jang"
+            address == "yong-In"
+            age == 25
         }
 
+        expect: "we don't use assert keyword !! Just use block with ( value ) {} "
+        with(people) {
+            verifyAll {
+                name == "Jang"
+                address == "yong-In"
+                age == 25
+            }
+        }
     }
-
 }
-// todo 배운거 정리
+// TODO ::  Arrange the spock and  use the spock to study other something.
