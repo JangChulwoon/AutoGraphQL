@@ -13,7 +13,6 @@ class Customer {
     }
 
     String statement() {
-        int frequentRenterPoints = 0
         Enumeration rentals = rentals.elements()
         String result = getName() + "고객님의 대여 기록 \n"
 
@@ -21,7 +20,7 @@ class Customer {
             Rental each = (Rental) rentals.nextElement()
 
 
-            frequentRenterPoints += each.getPoints(each)
+
 
             // 이번에 대여하는 비디오 정보와 대여료 출력
             result += "/t" + each.getMovie().getTitle() + "\t" +
@@ -31,7 +30,7 @@ class Customer {
 
         }
         result += "누적 대여료: " + String.valueOf(getTotalAmount()) + "\n"
-        result += "적립 포인트: " + String.valueOf(frequentRenterPoints)
+        result += "적립 포인트: " + String.valueOf(getFrequentRenterPoints())
         return result
     }
 
@@ -48,6 +47,16 @@ class Customer {
         return totalAmount
     }
 
+    double getFrequentRenterPoints() {
+        double frequentRenterPoints = 0;
+        Enumeration rentals = rentals.elements()
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement()
 
+            frequentRenterPoints += each.getPoints(each)
+
+        }
+        return frequentRenterPoints
+    }
 }
 
