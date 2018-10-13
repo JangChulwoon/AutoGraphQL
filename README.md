@@ -1,8 +1,7 @@
-# AutoGraphQL
-To generate automatically GraphQL structure. (based on Java)  
+# TIL PR
 
-This project is toy project... 
 
-I don't yet decide Project' structure....
+Today I learned ! 
 
-Proxy Server ..?  library ...?  ... um ..
+first. [Spock](http://spockframework.org/spock/docs/1.2/spock_primer.html#specifications_as_documentation) 
+Second. Refactoring Book.
