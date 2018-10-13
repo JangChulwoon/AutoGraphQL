@@ -30,7 +30,11 @@ class Customer {
 
             // 현재까지 누적된 총 대여료
             totalAmount += each.getCharge(each)
+
         }
+        result += "누적 대여료: " + String.valueOf(totalAmount) + "\n"
+        result += "적립 포인트: " + String.valueOf(frequentRenterPoints)
+        return result
     }
 
 
