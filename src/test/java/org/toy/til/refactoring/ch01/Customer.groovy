@@ -40,22 +40,22 @@ class Customer {
         }
     }
 
-    private double amountFor(Rental each) {
+    private double amountFor(Rental rental) {
         double thisAmount = 0
-        switch (each.getMovie().getPriceCode()) {
+        switch (rental.getMovie().getPriceCode()) {
             case Movie.REGULAR:
                 thisAmount += 2
-                if (each.getDaysRented() > 2) {
-                    thisAmount += (each.getDaysRented() - 2) * 15
+                if (rental.getDaysRented() > 2) {
+                    thisAmount += (rental.getDaysRented() - 2) * 15
                 }
                 break
             case Movie.NEW_RELEASE:
-                thisAmount += each.getDaysRented() * 3
+                thisAmount += rental.getDaysRented() * 3
                 break
             case Movie.CHILD_RENS:
                 thisAmount += 1.5
-                if (each.getDaysRented() > 3) {
-                    thisAmount += (each.getDaysRented() - 3) * 1.5
+                if (rental.getDaysRented() > 3) {
+                    thisAmount += (rental.getDaysRented() - 3) * 1.5
                 }
                 break;
         }
