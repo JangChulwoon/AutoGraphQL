@@ -1,12 +1,15 @@
 package org.toy.autographql.groovy
 
+import org.spockframework.runtime.SpockAssertionError
+import spock.lang.FailsWith
 import spock.lang.Shared
 import spock.lang.Specification
 
+
 class People {
-    private def name;
-    private String address;
-    private int age;
+    private def name
+    private String address
+    private int age
 
     People(String name, String address, int age) {
         this.name = name
@@ -47,7 +50,7 @@ class SimpleSpock extends Specification {
     // Shared를 안붙이면 setUp과 동일하게 동작한다.
     @Shared
     def num = 4
-    // def num = 4;
+    // def num = 4
 
     // setupSpec or cleanupSpec -> shared
     // 일반 애들 setup() and cleanup()
@@ -88,7 +91,7 @@ class SimpleSpock extends Specification {
 
 
         when: "음 ?"
-        def people = new People("Jang", "yong-In", 25);
+        def people = new People("Jang", "yong-In", 25)
 
         then: "테스트"
         fixtureMethod(people) // wrong case
@@ -103,7 +106,7 @@ class SimpleSpock extends Specification {
 
 
         when:
-        def people = new People("Jang", "yong-In", 25);
+        def people = new People("Jang", "yong-In", 25)
 
         then:
         true
@@ -136,7 +139,7 @@ class SimpleSpock extends Specification {
     def "with statement"() {
 
         when:
-        def people = new People("Jang", "yong-In", 25);
+        def people = new People("Jang", "yong-In", 25)
 
         then:
         with(people) {
@@ -165,5 +168,23 @@ class SimpleSpock extends Specification {
 
     }
 
+    // 이럴바엔 그냥 thrown() 을 쓰는게 더 좋을 듯 함.
+    @FailsWith(SpockAssertionError)
+    def "It is fail"() {
+        Socket con = new Socket()
+
+        expect:
+        a == b
+
+        cleanup: "cleanup Test"
+        con.close()
+
+        where:
+        a | b
+        2 | 4
+        4 | 5
+
+
+    }
 }
-// todo 배운거 정리
+// TODO ::  Arrange the spock and  use the spock to study other something.
