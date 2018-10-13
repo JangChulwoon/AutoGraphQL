@@ -21,22 +21,15 @@ class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement()
 
-            // 비디오 종류별 대여료 계산
-            double thisAmount = each.getCharge(each)
-            // 적립 포인트 1 증가
-            frequentRenterPoints++
 
-            // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) {
-                frequentRenterPoints++
-            }
+            frequentRenterPoints += each.getPoints(each)
 
             // 이번에 대여하는 비디오 정보와 대여료 출력
             result += "/t" + each.getMovie().getTitle() + "\t" +
-                    String.valueOf(thisAmount) + "\n"
+                    String.valueOf(each.getCharge(each)) + "\n"
 
             // 현재까지 누적된 총 대여료
-            totalAmount += thisAmount
+            totalAmount += each.getCharge(each)
         }
     }
 

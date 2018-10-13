@@ -10,7 +10,7 @@ class Rental {
         this.daysRented = daysRented
     }
 
-    private double getCharge() {
+    double getCharge() {
         double thisAmount = 0
         switch (this.getMovie().getPriceCode()) {
             case Movie.REGULAR:
@@ -30,5 +30,14 @@ class Rental {
                 break;
         }
         return thisAmount
+    }
+
+    int getPoints(Rental each) {
+
+        // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
+        if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) {
+            return 2
+        }
+        return 1;
     }
 }
