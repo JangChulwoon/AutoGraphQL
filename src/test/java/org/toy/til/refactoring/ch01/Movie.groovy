@@ -1,46 +1,22 @@
 package org.toy.til.refactoring.ch01
 
+import org.toy.til.refactoring.ch01.price.Price
+
 class Movie {
-    static final int REGULAR = 0
-    static final int NEW_RELEASE = 1
-    static final int CHILD_RENS = 2
 
     String title
-    int priceCode
+    Price price
 
-    Movie(title, priceCode) {
+    Movie(title, Price price) {
         this.title = title
-        this.priceCode = priceCode
+        this.price = price
     }
-
 
     double getCharge(int dayRental) {
-        double thisAmount = 0
-        switch (this.getPriceCode()) {
-            case REGULAR:
-                thisAmount += 2
-                if (dayRental > 2) {
-                    thisAmount += (dayRental - 2) * 1.5
-                }
-                break
-            case NEW_RELEASE:
-                thisAmount += dayRental * 3
-                break
-            case CHILD_RENS:
-                thisAmount += 1.5
-                if (dayRental > 3) {
-                    thisAmount += (dayRental - 3) * 1.5
-                }
-                break;
-        }
-        return thisAmount
+        return price.getCharge(dayRental)
     }
 
-    int getPoints(Rental each) {
-        // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
-        if ((each.getMovie().getPriceCode() == NEW_RELEASE) && each.getDaysRented() > 1) {
-            return 2
-        }
-        return 1;
+    int getPoints(int dayRental) {
+        return price.getPoints(dayRental)
     }
 }

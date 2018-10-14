@@ -14,7 +14,7 @@ class Rental {
         return movie.getCharge(daysRented)
     }
 
-    int getPoints(Rental each) {
-        return movie.getPoints(each);
+    int getPoints() {
+        return movie.getPoints(this.daysRented);
     }
 }

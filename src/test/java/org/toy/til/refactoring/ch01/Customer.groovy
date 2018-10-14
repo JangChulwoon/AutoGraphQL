@@ -48,7 +48,7 @@ class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement()
 
-            frequentRenterPoints += each.getPoints(each)
+            frequentRenterPoints += each.getPoints()
 
         }
         return frequentRenterPoints
