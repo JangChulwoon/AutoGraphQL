@@ -26,4 +26,45 @@ class MovieRentalSpecification extends Specification {
 
     }
 
+
+    def "When Movie type is regular"() {
+        given:
+        def movie = new Movie("Regular", 0)
+
+        expect:
+        movie.getCharge(dayRental) == charge
+
+        where:
+        dayRental | charge
+        2         | 2
+        3         | 3.5
+    }
+
+    def "When Movie type is new release"() {
+        given:
+        def movie = new Movie("NEW_RELEASE", 1)
+
+        expect:
+        movie.getCharge(dayRental) == charge
+
+        where:
+        dayRental | charge
+        2         | 6
+        3         | 9
+    }
+
+    def "When Movie type is child"() {
+        given:
+        def movie = new Movie("CHILD_RENS", 2)
+
+        expect:
+        movie.getCharge(dayRental) == charge
+
+        where:
+        dayRental | charge
+        3         | 1.5
+        4         | 3
+
+    }
+
 }

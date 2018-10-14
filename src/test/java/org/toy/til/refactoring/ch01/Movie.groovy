@@ -1,9 +1,9 @@
 package org.toy.til.refactoring.ch01
 
 class Movie {
-    static final int CHILD_RENS = 2
     static final int REGULAR = 0
-    static final int NEW_RELEASE = 0
+    static final int NEW_RELEASE = 1
+    static final int CHILD_RENS = 2
 
     String title
     int priceCode
@@ -20,7 +20,7 @@ class Movie {
             case REGULAR:
                 thisAmount += 2
                 if (dayRental > 2) {
-                    thisAmount += (dayRental - 2) * 15
+                    thisAmount += (dayRental - 2) * 1.5
                 }
                 break
             case NEW_RELEASE:
