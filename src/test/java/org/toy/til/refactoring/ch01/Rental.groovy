@@ -15,11 +15,6 @@ class Rental {
     }
 
     int getPoints(Rental each) {
-
-        // 최신물을 이틀 이상 대여하면 보너스 포인트 지급
-        if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) {
-            return 2
-        }
-        return 1;
+        return movie.getPoints(each);
     }
 }

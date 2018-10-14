@@ -2,7 +2,7 @@ package org.toy.til.refactoring.ch01
 
 class Customer {
     String name
-    Vector rentals = new Vector();
+    Vector<Rental> rentals = new Vector<>();
 
     Customer(String name) {
         this.name = name
@@ -19,14 +19,9 @@ class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement()
 
-
-
-
             // 이번에 대여하는 비디오 정보와 대여료 출력
-            result += "/t" + each.getMovie().getTitle() + "\t" +
-                    String.valueOf(each.getCharge(each)) + "\n"
-
-
+            result += each.getMovie().getTitle() + "\t" +
+                    String.valueOf(each.getCharge()) + "\n"
 
         }
         result += "누적 대여료: " + String.valueOf(getTotalAmount()) + "\n"
@@ -41,7 +36,7 @@ class Customer {
             Rental each = (Rental) rentals.nextElement()
 
             // 현재까지 누적된 총 대여료
-            totalAmount += each.getCharge(each)
+            totalAmount += each.getCharge()
 
         }
         return totalAmount
