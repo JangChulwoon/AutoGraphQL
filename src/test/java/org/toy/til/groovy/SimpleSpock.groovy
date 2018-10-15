@@ -5,8 +5,8 @@ import spock.lang.FailsWith
 import spock.lang.Shared
 import spock.lang.Specification
 
-
 // class name convention is (word)Specification
+//@Stepwise  // if some TC fail, another TC don't operate.
 class SimpleSpock extends Specification {
 
     /**
@@ -35,6 +35,7 @@ class SimpleSpock extends Specification {
     def "non shard variable TC1"() {
         given:
         nonSharedNum = 0
+        println System.getProperty("spock.configuration");
 
         expect:
         nonSharedNum == 0
@@ -56,7 +57,7 @@ class SimpleSpock extends Specification {
 
     def "shard variable TC2"() {
         expect:
-        sharedNum == 0
+        asa == o
     }
 
     /**
@@ -214,5 +215,6 @@ class SimpleSpock extends Specification {
             }
         }
     }
+
 }
 // TODO ::  Arrange the spock and  use the spock to study other something.
