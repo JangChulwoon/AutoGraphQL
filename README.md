@@ -1,8 +1,17 @@
 # TIL PR
 
+TIL 을 PR 형식으로 작성한다.
 
-Today I learned ! 
 
-first. [Spock](http://spockframework.org/spock/docs/1.2/spock_primer.html#specifications_as_documentation)       
+#### TODO
 
-Second. Refactoring Book.
+
+#### Doing 
+
+1. Spock 
+2. refactoring book
+
+#### Pending 
+
+
+#### Done
