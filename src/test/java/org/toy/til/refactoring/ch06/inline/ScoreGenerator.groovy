@@ -4,11 +4,7 @@ class ScoreGenerator {
 
 
     def calculate(rating) {
-        return moreThanFiveRating(rating) ? 1 : 2;
-
+        return rating > 5 ? 1 : 2;
     }
 
-    private boolean moreThanFiveRating(rating) {
-        rating > 5
-    }
 }
