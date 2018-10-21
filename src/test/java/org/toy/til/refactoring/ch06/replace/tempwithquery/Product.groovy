@@ -2,15 +2,24 @@ package org.toy.til.refactoring.ch06.replace.tempwithquery
 
 class Product {
 
-    double getPrice(quantity, itemprice) {
-        int basePrice = quantity * itemprice
-        double discountFactor;
+    /*
+    한번만 호출되는지를 확인해야한다. -> final
 
-        if (basePrice > 1000) {
-            discountFactor = 0.95
+     */
+
+    double getPrice(quantity, itemPrice) {
+        return getBasePrice(quantity, itemPrice) * getDiscountFactor(quantity, itemPrice)
+    }
+
+    double getDiscountFactor(quantity, itemPrice) {
+        if (getBasePrice(quantity, itemPrice) > 1000) {
+            return 0.95
         } else {
-            discountFactor = 0.98
+            return 0.98
         }
-        return basePrice * discountFactor
+    }
+
+    double getBasePrice(quantity, itemPrice) {
+        quantity * itemPrice
     }
 }
