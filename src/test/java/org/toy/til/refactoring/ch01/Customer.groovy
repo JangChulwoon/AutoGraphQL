@@ -53,5 +53,7 @@ class Customer {
         }
         return frequentRenterPoints
     }
+
+
 }
 
