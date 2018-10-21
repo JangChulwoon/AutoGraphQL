@@ -1,4 +1,4 @@
-package org.toy.til.refactoring.ch06
+package org.toy.til.refactoring.ch06.extract
 
 import spock.lang.Specification
 
