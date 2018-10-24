@@ -1,12 +1,12 @@
 package org.toy.til.groovy
 
+import org.junit.Ignore
 import org.spockframework.runtime.SpockAssertionError
-import spock.lang.FailsWith
-import spock.lang.Shared
-import spock.lang.Specification
+import spock.lang.*
 
 // class name convention is (word)Specification
-//@Stepwise  // if some TC fail, another TC don't operate.
+//@Stepwise  // if some TC fail, another TC don't operate. + not override ignore / ignoreIf / IgnoreRest
+//@Timeout(2) 각 블럭마다 2초, 만약 메서드 위에 선언되면 걔를 우선으로 ...
 class SimpleSpock extends Specification {
 
     /**
@@ -32,10 +32,10 @@ class SimpleSpock extends Specification {
     def sharedNum = 4
     def nonSharedNum = 4
 
+    @Ignore
     def "non shard variable TC1"() {
         given:
         nonSharedNum = 0
-        println System.getProperty("spock.configuration");
 
         expect:
         nonSharedNum == 0
@@ -214,6 +214,46 @@ class SimpleSpock extends Specification {
                 age == 25
             }
         }
+    }
+
+
+    @IgnoreIf({ System.getProperty("os.name").contains("Mac OS X") })
+    def "I'll run everywhere but on MAC"() {
+
+        expect:
+        "1" == "1"
+
+
+    }
+
+    @Requires({ System.getProperty("os.name").contains("Mac OS X") })
+    def "I'll run MAC"() {
+
+        expect:
+        "1" == "1"
+
+
+    }
+
+    @PendingFeature
+    def "not implemented yet"() {
+
+        expect:
+        1 == 0
+        2 == 0
+
+
+    }
+
+    @Timeout(5)
+    def "5초 이상 걸리면 실패"() {
+
+        Thread.sleep(5000);
+
+        expect:
+        1 == 1
+
+
     }
 
 }
