@@ -72,10 +72,45 @@ void printOwing(List<Order> orderList) {
 위 코드는 단순 문자열을 print 하는 부분과 총 가격을 계산하는 부분, 그 결과를 출력하는 부분 총 3가지로 나눌 수 있다.
 작업을 수행하기전, TC를 만들어 두고 리팩토링을 수행하자.
 
+#### Phase 1 print 함수 분리 
+
+
+```
+void printOwing(List<Order> orderList) {
+
+    def totalPrice = 0
+
+    printTopMenu()
+    
+    for (Order order : orderList) {
+        totalPrice += order.price
+    }
+
+    println("---- ---- ---- -----")
+    println("TOTAL PRICE : ${totalPrice}")
+    println("---- ---- ---- -----")
+}
+
+void printTopMenu(){
+    println("---- ---- ---- -----")
+    println("---- order List ----")
+    println("---- ---- ---- -----")
+}
+
+```
+
+
+
+
+#### TC에 관한 개인적인 고민들 
+
 > 단순 void 일 경우 TC를 어떻게 작성하지? 단순 call 을 확인하면 되나 ?
 
 단순 call 정도만 확인하면 되지 않을까 싶다. 
 너무 깊게 관여할 필요 없이 call의 순서와 예상되는 결과에 대해, 함수가 어떤 결과를 리턴하는지 정도만 확인하면 되지 않을까 ?
+
+
+> TC equals  specification ... ?
 
 (최근 내가 작성한 TC 를 보여줘도 좋을 듯.)
 
