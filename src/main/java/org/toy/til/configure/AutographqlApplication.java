@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("org.toy.autographql")
+@ComponentScan("org.toy.til")
 @SpringBootApplication
 public class AutographqlApplication {
 
