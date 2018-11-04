@@ -4,7 +4,6 @@ import spock.lang.Specification
 
 class TC extends Specification {
 
-
     def "출력 확인"() {
         given:
         def order = new Order();

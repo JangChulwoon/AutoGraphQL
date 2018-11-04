@@ -5,19 +5,25 @@ class Order {
     def price;
 
     void printOwing(List<Order> orderList) {
-
-        def totalPrice = 0
-
-        println("---- ---- ---- -----")
-        println("---- order List ----")
-        println("---- ---- ---- -----")
-
-        for (Order order : orderList) {
-            totalPrice += order.price
+        getPrint()
+        def totalPrice1 = 0
+        for (Order order : (orderList)) {
+            totalPrice1 += order.price
         }
+        def totalPrice = totalPrice1
+        getPrintPrice(totalPrice)
+    }
 
+    private getPrintPrice(totalPrice) {
         println("---- ---- ---- -----")
         println("TOTAL PRICE : ${totalPrice}")
+        println("---- ---- ---- -----")
+    }
+
+
+    private getPrint() {
+        println("---- ---- ---- -----")
+        println("---- order List ----")
         println("---- ---- ---- -----")
     }
 

@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class TC extends Specification {
 
-    def "할인된 가격 가져오기."() {
+    def "된다 !! "() {
         given:
         Product product = new Product()
 

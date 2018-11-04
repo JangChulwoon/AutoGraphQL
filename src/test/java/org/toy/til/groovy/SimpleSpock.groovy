@@ -5,7 +5,8 @@ import org.spockframework.runtime.SpockAssertionError
 import spock.lang.*
 
 // class name convention is (word)Specification
-//@Stepwise  // if some TC fail, another TC don't operate. + not override ignore / ignoreIf / IgnoreRest
+@Stepwise
+// if some TC fail, another TC don't operate. + not override ignore / ignoreIf / IgnoreRest
 //@Timeout(2) 각 블럭마다 2초, 만약 메서드 위에 선언되면 걔를 우선으로 ...
 class SimpleSpock extends Specification {
 
@@ -53,6 +54,20 @@ class SimpleSpock extends Specification {
 
         expect:
         sharedNum == 0
+    }
+
+    @Timeout(1)
+    def "1shard variable TC2"() {
+
+        expect:
+        a == 1
+        where:
+        a << [fixture(), fixture()]
+    }
+
+    def fixture() {
+        Thread.sleep(1500)
+        1
     }
 
     def "shard variable TC2"() {
@@ -216,8 +231,10 @@ class SimpleSpock extends Specification {
         }
     }
 
+    // static value / static method  만 가능
+    static def condition = true;
 
-    @IgnoreIf({ System.getProperty("os.name").contains("Mac OS X") })
+    @IgnoreIf({ SimpleSpock.condition })
     def "I'll run everywhere but on MAC"() {
 
         expect:
