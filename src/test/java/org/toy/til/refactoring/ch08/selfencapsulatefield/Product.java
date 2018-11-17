@@ -2,7 +2,7 @@ package org.toy.til.refactoring.ch08.selfencapsulatefield;
 
 public class Product {
 
-    public static final double LIMIT_RATE = 0.5;
+    private static final double LIMIT_RATE = 0.5;
     private int price;
     private int count;
     private double discount;
@@ -35,4 +35,15 @@ public class Product {
         return price;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 }
