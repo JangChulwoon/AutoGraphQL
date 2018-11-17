@@ -20,6 +20,10 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+
+	maven {
+		url "https://oss.sonatype.org/content/repositories/snapshots/"
+	}
 }
 
 
@@ -30,6 +34,7 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testCompile(
 			'org.codehaus.groovy:groovy-all:2.4.11',
-			'org.spockframework:spock-core:1.1-groovy-2.4'
+			"org.spockframework:spock-core:1.2-groovy-2.4-SNAPSHOT",
+			"org.spockframework:spock-spring:1.2-groovy-2.4-SNAPSHOT"
 	)
 }
