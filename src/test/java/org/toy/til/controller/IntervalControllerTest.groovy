@@ -1,26 +1,26 @@
 package org.toy.til.controller
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
+@WebMvcTest(controllers = [IntervalController])
 class IntervalControllerTest extends Specification {
-    MockMvc mvc;
 
-    def setup() {
-        mvc = MockMvcBuilders.standaloneSetup(new IntervalController()).build();
-    }
+    @Autowired
+    private MockMvc mockMvc;
 
-    def "should pass user registration details to domain component and return 'created' status"() {
+    def "Spring mockMvc TC"() {
 
         when:
-        def results = mvc.perform(get('/event/focusLeave/1')
+        def results = mockMvc.perform(get('/event/focusLeave/1')
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
 
         then:
