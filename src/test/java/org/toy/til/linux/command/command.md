@@ -121,6 +121,17 @@ hard link를 directory 에 사용하는 경우, 무한 루프 tree 형태를 생
 보통 서버 설정파일들을 workspace folder 에 링크(`sybolic`)를 걸어 사용한다.
  
  
+#### which
+
+```aidl
+which ls 
+```
+
+인자로 넘어온 명령어의 실행 경로를 알 수 있다.
+만약 alias 가 있으면, alias 내역을 출력해준다.
+
+> java 나 mvn 등 path 를 알고싶을 때, 쓰면 유용할듯하다.
+
  
 #### 여담 
 
