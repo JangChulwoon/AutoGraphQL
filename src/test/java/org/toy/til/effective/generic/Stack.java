@@ -1,7 +1,6 @@
 package org.toy.til.effective.generic;
 
-import java.util.Arrays;
-import java.util.EmptyStackException;
+import java.util.*;
 
 // item.29 Use Generic field as long as you can.
 public class Stack {
@@ -86,6 +85,44 @@ public class Stack {
             if (elements.length == size) {
                 elements = Arrays.copyOf(elements, 2 * size + 1);
             }
+        }
+    }
+
+    static class Trouble<T> {
+        public static void main(String[] args) {
+            Trouble trouble = new Trouble();
+            // 이건 조금 신박한데 ?
+            /*for (String str : trouble.getStrs()) {
+                System.out.println(str);
+            }*/
+        }
+
+        public List<String> getStrs() {
+            return Arrays.asList("str");
+        }
+    }
+
+    static class NonGeneric {
+        Collection<Number> myNumbers() {
+            return null;
+        }
+    }
+
+    abstract static class RawMembers<T> extends NonGeneric
+            implements Collection<String> {
+
+        static Collection<NonGeneric> cng =
+                new ArrayList<NonGeneric>();
+
+        public static void main(String[] args) {
+            RawMembers rw = null;
+            // OK
+            Collection<Number> cn = rw.myNumbers();
+            // Unchecked warning
+            Iterator<String> is = rw.iterator();
+            // OK, static member
+            Collection<NonGeneric> cnn = rw.cng;
+
         }
     }
 }
