@@ -3,24 +3,10 @@ package org.toy.til.tdd.asert;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class Assert {
+public class Assert {
 
-    public static void assertThat(int actual, int expect) {
-        if (expect != actual) {
-            fail(actual, expect);
-        }
-        success();
-    }
-
-    public static void assertThat(Double actual, Double expect) {
-        if (actual.compareTo(expect) != 0) {
-            fail(actual, expect);
-        }
-        success();
-    }
-
-    public static void assertThat(Long actual, Long expect) {
-        if (actual.compareTo(expect) != 0) {
+    public static <T> void assertThat(T actual, T expect) {
+        if (!actual.equals(expect)) {
             fail(actual, expect);
         }
         success();
