@@ -31,12 +31,11 @@ class Assert {
         log.info("Success");
     }
 
-    private static void fail(Object actual, Object expect) throws NotEqualsException {
+    private static void fail(Object actual, Object expect) {
         throw new NotEqualsException(String.format("expect : %s  actual : %s", actual.toString(), expect.toString()));
     }
 
-
-    public static class NotEqualsException extends Error {
+    public static class NotEqualsException extends RuntimeException {
         public NotEqualsException(String message) {
             super(message);
         }
