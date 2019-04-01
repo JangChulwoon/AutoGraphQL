@@ -1,10 +1,9 @@
 package org.toy.til.tdd.asert;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matcher;
 
-@Slf4j
+
 public class Assert {
 
     public static <T> void assertThat(T actual, T expect) {
@@ -27,7 +26,7 @@ public class Assert {
     }
 
     private static void success() {
-        log.info("Success");
+        //log.info("Success");
     }
 
     private static void fail(Object actual, Object expect) {

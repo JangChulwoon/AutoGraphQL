@@ -37,7 +37,7 @@ public class EnumMapTest {
         SOLID, LIQUID, GAS;
 
         enum Transition {
-            MELT(SOLID, LIQUID),
+          /*  MELT(SOLID, LIQUID),
             FREEZE(LIQUID, SOLID),
             BOIL(LIQUID, GAS),
             CONDENSE(GAS, LIQUID),
@@ -56,7 +56,7 @@ public class EnumMapTest {
 
             public static Transition from(PhaseUsingEnumMap from, PhaseUsingEnumMap to) {
                 return m.get(from).get(to);
-            }
+            }*/
         }
     }
 }
