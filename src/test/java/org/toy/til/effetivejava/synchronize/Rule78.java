@@ -2,7 +2,7 @@ package org.toy.til.effetivejava.synchronize;
 
 import java.util.concurrent.TimeUnit;
 
-public class Main {
+public class Rule78 {
     /*
          동기화를 배타적 실행만으로 생각하지만, 다른 관점들도 존재한다.
 
